@@ -723,7 +723,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 		a.recycle();
 
-		mSwipeBackOverlay = new ColorDrawable(0x00000000);
+		mSwipeBackOverlay = new ColorDrawable(0xFF000000);
 
 		mSwipeBackContainer = new NoClickThroughFrameLayout(context);
 		mSwipeBackContainer.setId(R.id.sb__swipeBackContainer);
