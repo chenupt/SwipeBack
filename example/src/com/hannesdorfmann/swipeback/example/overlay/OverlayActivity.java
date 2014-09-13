@@ -16,8 +16,8 @@ public class OverlayActivity extends SwipeBackActivity {
 
 		// Init the swipe back mechanism
 		SwipeBack.attach(this, Type.OVERLAY, Position.LEFT)
-		.setContentView(R.layout.activity_overlay)
-				.setSwipeBackView(R.layout.swipeback_default)
+		        .setContentView(R.layout.activity_overlay)
+				.setUpDefalutSwipeBackView()
 				.setDividerEnabled(true);
 
 	}

@@ -16,11 +16,11 @@ public class BottomActivity extends SwipeBackActivity {
 
 		// Init the swipe back mechanism
 		SwipeBack
-		.attach(this, Type.BEHIND, Position.BOTTOM,
-				SwipeBack.DRAG_WINDOW)
+		.attach(this, Type.BEHIND, Position.BOTTOM, SwipeBack.DRAG_WINDOW)
+                .setDrawOverlay(true)
+                .setDividerEnabled(true)
 				.setContentView(R.layout.activity_bottom)
-				.setSwipeBackView(R.layout.swipeback_bottom)
-				.setSwipeBackTransformer(new BottomSwipeBackTransformer());
+				.setUpDefalutSwipeBackView();
 	}
 
 	@Override

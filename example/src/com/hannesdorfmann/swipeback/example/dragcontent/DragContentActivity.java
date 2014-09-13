@@ -10,16 +10,16 @@ import com.hannesdorfmann.swipeback.example.SwipeBackActivity;
 
 public class DragContentActivity extends SwipeBackActivity {
 
-	@Override
-	public void onCreate(Bundle saved) {
-		super.onCreate(saved);
+    @Override
+    public void onCreate(Bundle saved) {
+        super.onCreate(saved);
 
-		// Init the swipe back mechanism
-		SwipeBack
-				.attach(this, Type.BEHIND, Position.LEFT,
-				SwipeBack.DRAG_CONTENT)
-				.setContentView(R.layout.activity_drag_content)
-				.setSwipeBackView(R.layout.swipeback_default);
+        // Init the swipe back mechanism
+        SwipeBack.attach(this, Type.BEHIND, Position.LEFT, SwipeBack.DRAG_CONTENT)
+                .setDrawOverlay(true)
+                .setDividerEnabled(true)
+                .setContentView(R.layout.activity_drag_content)
+                .setUpDefalutSwipeBackView();
 
-	}
+    }
 }
