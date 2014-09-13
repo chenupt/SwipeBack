@@ -796,7 +796,20 @@ public abstract class SwipeBack extends ViewGroup {
             @Override
             public void onGlobalLayout() {
                 mSwipeBackView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                // FIXME getHeight is wrong when position is bottom
+                switch (mPosition) {
+                    case TOP:
+                    case BOTTOM:
+                        mSwipeBackViewSize = mSwipeBackView.getHeight();
+                        break;
+                    case LEFT:
+                    case RIGHT:
+                    default:
+                        mSwipeBackViewSize = mSwipeBackView.getWidth();
+                        break;
+                }
                 Log.d(TAG, "swipe back view size" + mSwipeBackView.getWidth());
+                Log.d(TAG, "swipe back view size" + mSwipeBackView.getHeight());
             }
         });
         getViewTreeObserver().addOnScrollChangedListener(mScrollListener);
