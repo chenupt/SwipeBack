@@ -8,15 +8,27 @@ Demo
 [demo](https://github.com/chenupt/SwipeBack/raw/dev/extra/swipeback-example.apk "demo")
 
 ![device-2014-09-13-223347.png](./extra/device-2014-09-13-223347.png "")
-exmple
+
 
 
 How to use it (EDITED)
 =============
 It's not supported yet to build it from xml.
 You simply have to set it up in you Activities onCreate() method.
-Instead of `Activity.setContentView()` call `SwipeBack.setContentView()` or not .
+Instead of `Activity.setContentView()` call `SwipeBack.setContentView()`. Or just call Activity.setContentView() before setUpDefaultSwipeBackView().
 
+
+styles.xml
+```xml
+<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    　　<item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+```
+
+You can also call attach method in your BaseActivity for all activities. The Activity.setContentView() can be called in child activity instead of SwipeBack.setContentView().
 ```java
 public class SwipeBackActivity extends FragmentActivity{
 
