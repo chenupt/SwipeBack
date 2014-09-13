@@ -20,6 +20,8 @@ public class SimpleActivity extends SwipeBackActivity {
         setContentView(R.layout.activity_simple);
 
         swipeBack = SwipeBack.attach(this, Position.LEFT)
+                .setDrawOverlay(true)
+                .setDividerEnabled(true)
                 .setUpDefalutSwipeBackView();
 
         swipeBack.setOnOpenListener(new SwipeBack.OnOpenListener() {
