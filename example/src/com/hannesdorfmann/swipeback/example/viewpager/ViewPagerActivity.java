@@ -22,7 +22,7 @@ public class ViewPagerActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         SwipeBack.attach(this, Position.LEFT)
                 .setContentView(R.layout.activity_view_pager)
-                .setUpDefalutSwipeBackView()
+                .setUpDefaultSwipeBackView()
                 .setDrawOverlay(true)
                 .setDividerEnabled(true)
                 .setOnInterceptMoveEventListener(

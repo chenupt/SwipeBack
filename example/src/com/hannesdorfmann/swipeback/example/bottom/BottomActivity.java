@@ -20,7 +20,7 @@ public class BottomActivity extends SwipeBackActivity {
                 .setDrawOverlay(true)
                 .setDividerEnabled(true)
 				.setContentView(R.layout.activity_bottom)
-				.setUpDefalutSwipeBackView();
+				.setUpDefaultSwipeBackView();
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class DragContentActivity extends SwipeBackActivity {
                 .setDrawOverlay(true)
                 .setDividerEnabled(true)
                 .setContentView(R.layout.activity_drag_content)
-                .setUpDefalutSwipeBackView();
+                .setUpDefaultSwipeBackView();
 
     }
 }

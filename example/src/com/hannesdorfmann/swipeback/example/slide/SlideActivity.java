@@ -18,7 +18,7 @@ public class SlideActivity extends SwipeBackActivity {
                 .setDrawOverlay(true)
                 .setDividerEnabled(true)
                 .setContentView(R.layout.activity_simple)
-                .setUpDefalutSwipeBackView();
+                .setUpDefaultSwipeBackView();
 
     }
 

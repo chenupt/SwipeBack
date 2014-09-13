@@ -6,27 +6,15 @@ SwipeBack is for Android Activities to do pretty the same as the android "back-b
 Demo
 ====
 
-[kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker)
-
-[![Kicker app](http://img.youtube.com/vi/-QgECTWOoa0/0.jpg)](http://www.youtube.com/watch?v=-QgECTWOoa0)
-
-[![See demo video](http://img.youtube.com/vi/T6mbg_wqlkc/0.jpg)](http://www.youtube.com/watch?v=T6mbg_wqlkc)
+![device-2014-09-13-223347.png](./extra/device-2014-09-13-223347.png "")
+exmple
 
 
-Dependency
-========
-SwipeBack is available on maven central
-
-```
-compile 'com.hannesdorfmann:swipeback:1.0.0'
-```
-
-
-How to use it
+How to use it (EDITED)
 =============
 It's not supported yet to build it from xml.
 You simply have to set it up in you Activities onCreate() method.
-Instead of `Activity.setContentView()` call `SwipeBack.setContentView()`.
+Instead of `Activity.setContentView()` call `SwipeBack.setContentView()` or not .
 
 ```java
 public class SwipeBackActivity extends FragmentActivity{
@@ -38,7 +26,7 @@ public class SwipeBackActivity extends FragmentActivity{
 		// Init the swipe back
 		SwipeBack.attach(this, Position.LEFT)
 		    .setContentView(R.layout.activity_simple)
-		    .setSwipeBackView(R.layout.swipeback_default);
+		    .setUpDefaultSwipeBackView();
 
 	}
 
@@ -52,7 +40,6 @@ public class SwipeBackActivity extends FragmentActivity{
 }
 ```
 
-The code above will use the default setup. `R.layout.swipeback_default`, the default swipe back layout is already provided by this library as well as `DefaultSwipeBackTransformer`, `R.anim.swipeback_stack_to_front`, `R.anim.swipeback_stack_to_back`, `R.anim.swipeback_stack_right_in` and `R.anim.swipeback_stack_right_out`.
 
 
 Customization

@@ -22,7 +22,7 @@ public class SimpleActivity extends SwipeBackActivity {
         swipeBack = SwipeBack.attach(this, Position.LEFT)
                 .setDrawOverlay(true)
                 .setDividerEnabled(true)
-                .setUpDefalutSwipeBackView();
+                .setUpDefaultSwipeBackView();
 
         swipeBack.setOnOpenListener(new SwipeBack.OnOpenListener() {
             @Override

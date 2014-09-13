@@ -1395,7 +1395,7 @@ public abstract class SwipeBack extends ViewGroup {
 		return this;
 	}
 
-    public SwipeBack setUpDefalutSwipeBackView() {
+    public SwipeBack setUpDefaultSwipeBackView() {
         int layoutResId = R.layout.swipeback_translate;
         mSwipeBackContainer.removeAllViews();
         mSwipeBackView = LayoutInflater.from(getContext()).inflate(layoutResId,
