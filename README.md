@@ -5,6 +5,7 @@ SwipeBack is for Android Activities to do pretty the same as the android "back-b
 
 Demo
 ====
+[demo](https://github.com/chenupt/SwipeBack/raw/dev/extra/swipeback-example.apk "demo")
 
 ![device-2014-09-13-223347.png](./extra/device-2014-09-13-223347.png "")
 exmple
