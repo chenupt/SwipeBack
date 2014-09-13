@@ -2,6 +2,7 @@
 
     <!-- The default background of the menu. -->
     <color name="sb__defaultBackground">#00000000</color>
+    <color name="sb__defaultContentBackground">#FFFFFF</color>
     <color name="sb__defaultDivider">#f7f7f7</color>
     <color name="sb__defaultText">#f7f7f7</color>
 </resources>

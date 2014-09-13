@@ -732,10 +732,18 @@ public abstract class SwipeBack extends ViewGroup {
 		mContentContainer.setId(R.id.sb__content);
 
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-			mContentContainer.setBackgroundDrawable(contentBackground);
+            if(contentBackground == null){
+                mContentContainer.setBackgroundDrawable(contentBackground);
+            }else{
+                mContentContainer.setBackgroundColor(getContext().getResources().getColor(R.color.sb__defaultContentBackground));
+            }
 			mSwipeBackContainer.setBackgroundDrawable(swipeBackBackground);
 		} else {
-			mContentContainer.setBackground(contentBackground);
+            if(contentBackground == null){
+                mContentContainer.setBackground(contentBackground);
+            }else{
+                mContentContainer.setBackgroundColor(getContext().getResources().getColor(R.color.sb__defaultContentBackground));
+            }
 			mSwipeBackContainer.setBackground(swipeBackBackground);
 		}
 
