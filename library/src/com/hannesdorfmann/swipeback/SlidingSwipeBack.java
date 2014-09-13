@@ -418,12 +418,18 @@ public class SlidingSwipeBack extends DraggableSwipeBack {
 		 switch (getPosition()) {
 		 case LEFT: {
 			 if (mIsDragging) {
-				 mVelocityTracker.computeCurrentVelocity(1000, mMaxVelocity);
-				 final int initialVelocity = (int) getXVelocity(mVelocityTracker);
-				 mLastMotionX = x;
-				 animateOffsetTo(initialVelocity > 0 ? mSwipeBackViewSize : 0, initialVelocity, true);
+                 if(onOpenListener != null){
+                     if(!onOpenListener.onOpen()) {
+                         close();
+                         return;
+                     }
+                 }
+                 mVelocityTracker.computeCurrentVelocity(1000, mMaxVelocity);
+                 final int initialVelocity = (int) getXVelocity(mVelocityTracker);
+                 mLastMotionX = x;
+                 animateOffsetTo(initialVelocity > 0 ? mSwipeBackViewSize : 0, initialVelocity, true);
 
-				 // Close the menu when content is clicked while the menu is visible.
+                 // Close the menu when content is clicked while the menu is visible.
 			 } else if (mSwipeBackViewVisible && x > offsetPixels) {
 				 close();
 			 }

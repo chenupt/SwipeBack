@@ -115,7 +115,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * The default drop shadow size in dp.
 	 */
-	private static final int DEFAULT_DIVIDER_SIZE_DP = 6;
+	private static final int DEFAULT_DIVIDER_SIZE_DP = 20;
 
 	/**
 	 * Drag mode for sliding only the content view.
@@ -187,7 +187,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * The default size of the swipe back view in dp
 	 */
-	private static final int DEFAULT_SIZE = 50;
+	private static final int DEFAULT_SIZE = 360;
 
 	/**
 	 * Drawable used as swipe back view overlay.
@@ -388,7 +388,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The activity the Swipe Back will be attached to.
 	 * @param type
@@ -401,7 +401,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The activity the swipe back will be attached to.
 	 * @param type
@@ -415,7 +415,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The activity the swipe back will be attached to.
 	 * @param position
@@ -429,7 +429,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The activity the swipe back will be attached to.
 	 * @param position
@@ -444,7 +444,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The activity the swipe back will be attached to.
 	 * @param type
@@ -462,7 +462,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity
-	 * 
+	 *
 	 * @param activity
 	 * @param type
 	 * @param position
@@ -479,7 +479,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity
-	 * 
+	 *
 	 * @param activity
 	 * @param type
 	 * @param position
@@ -492,7 +492,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Attaches the SwipeBack to the Activity.
-	 * 
+	 *
 	 * @param activity
 	 *            The activity the swipe back will be attached to.
 	 * @param type
@@ -560,7 +560,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Determines if the activity has been destroyed or finished. This is useful
 	 * to dertermine if a
-	 * 
+	 *
 	 * @return
 	 */
 	@SuppressLint("NewApi")
@@ -693,13 +693,12 @@ public abstract class SwipeBack extends ViewGroup {
 
 		mSwipeBackViewSize = a.getDimensionPixelSize(R.styleable.SwipeBack_sbSwipeBackSize, dpToPx(DEFAULT_SIZE));
 
-		mDividerEnabled = a.getBoolean(R.styleable.SwipeBack_sbDividerEnabled,
-				false);
+		mDividerEnabled = a.getBoolean(R.styleable.SwipeBack_sbDividerEnabled, false);
 
 		mDividerDrawable = a.getDrawable(R.styleable.SwipeBack_sbDivider);
 
 		if (mDividerDrawable == null) {
-			mDividerAsShadowColor = a.getColor(R.styleable.SwipeBack_sbDividerAsShadowColor, 0xFF000000);
+			mDividerAsShadowColor = a.getColor(R.styleable.SwipeBack_sbDividerAsShadowColor, 0x33000000);
 		} else {
 			mCustomDivider = true;
 		}
@@ -724,7 +723,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 		a.recycle();
 
-		mSwipeBackOverlay = new ColorDrawable(0xFF000000);
+		mSwipeBackOverlay = new ColorDrawable(0x00000000);
 
 		mSwipeBackContainer = new NoClickThroughFrameLayout(context);
 		mSwipeBackContainer.setId(R.id.sb__swipeBackContainer);
@@ -741,7 +740,6 @@ public abstract class SwipeBack extends ViewGroup {
 		}
 
 		initSwipeListener();
-
 	}
 
 	@Override
@@ -785,7 +783,15 @@ public abstract class SwipeBack extends ViewGroup {
 	@Override
 	protected void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		getViewTreeObserver().addOnScrollChangedListener(mScrollListener);
+        ViewTreeObserver observer = mSwipeBackView.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mSwipeBackView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                Log.d(TAG, "swipe back view size" + mSwipeBackView.getWidth());
+            }
+        });
+        getViewTreeObserver().addOnScrollChangedListener(mScrollListener);
 	}
 
 	@Override
@@ -868,7 +874,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Disable or enable Touch. You can use this method to disable swipe back
 	 * with a swipe gesture.
-	 * 
+	 *
 	 * @param enabled
 	 */
 	public void setTouchEnabled(boolean enabled) {
@@ -961,7 +967,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Toggles the swipe back open and close.
-	 * 
+	 *
 	 * @param animate
 	 *            Whether open/close should be animated.
 	 */
@@ -976,7 +982,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Opens the swipe back.
-	 * 
+	 *
 	 * @param animate
 	 *            Whether open/close should be animated.
 	 */
@@ -985,7 +991,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Set the background color of the swipe back view container (The container
 	 * where the swipe back view is inflated into)
-	 * 
+	 *
 	 * @param color
 	 *            The color (not resource id)
 	 * @return
@@ -999,7 +1005,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Set the background of the wipe swipe back view container (The container
 	 * where the swipe back view is inflated into)
-	 * 
+	 *
 	 * @param d
 	 * @return
 	 */
@@ -1018,7 +1024,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Set the background of the wipe swipe back view container (The container
 	 * where the swipe back view is inflated into)
-	 * 
+	 *
 	 * @param resId
 	 *            The resource id of the drawable. Will interanlly call
 	 *            getResources().getDrawable(resId)
@@ -1046,14 +1052,14 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Indicates whether the swipe back is currently visible.
-	 * 
+	 *
 	 * @return True if the swipe back is open, false otherwise.
 	 */
 	public abstract boolean isVisible();
 
 	/**
 	 * Set the size of the swipe back when open.
-	 * 
+	 *
 	 * @param size
 	 *            The size of the swipe back.
 	 */
@@ -1061,7 +1067,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Returns the size of the swipe back.
-	 * 
+	 *
 	 * @return The size of the swipe back.
 	 */
 	public int getSize() {
@@ -1104,7 +1110,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Enables or disables offsetting the swipe back when dragging the drawer.
-	 * 
+	 *
 	 * @param offsetEnabled
 	 *            True to offset the swipe back, false otherwise.
 	 */
@@ -1113,7 +1119,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Indicates whether the swipe back is being offset when dragging the
 	 * drawer.
-	 * 
+	 *
 	 * @return True if the swipe back is being offset, false otherwise.
 	 */
 	public abstract boolean getOffsetSwipeBackEnabled();
@@ -1168,17 +1174,17 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Sets the color of the divider, if you have set the option to use a shadow
 	 * gradient as divider
-	 * 
+	 *
 	 * You must enable the divider by calling
 	 * {@link #setDividerEnabled(boolean)}
-	 * 
+	 *
 	 * @param color
 	 *            The color of the divider shadow.
 	 */
 	public SwipeBack setDividerAsShadowColor(int color) {
 		GradientDrawable.Orientation orientation = getDividerOrientation();
 
-		final int endColor = color & 0x00FFFFFF;
+		final int endColor = 0x00000000;
 		GradientDrawable gradient = new GradientDrawable(orientation,
 				new int[] {
 				color,
@@ -1193,7 +1199,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Sets the drawable of the divider. You must enable the divider by calling
 	 * {@link #setDividerEnabled(boolean)}
-	 * 
+	 *
 	 * @param drawable
 	 *            The drawable of the divider.
 	 */
@@ -1207,10 +1213,10 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * Sets the drawable resource id of the divider . You must enable the
 	 * divider by calling {@link #setDividerEnabled(boolean)}
-	 * 
+	 *
 	 * @param resId
 	 *            The resource identifier of the the drawable.
-	 * 
+	 *
 	 */
 	public SwipeBack setDivider(int resId) {
 		return setDivider(getResources().getDrawable(resId));
@@ -1225,7 +1231,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Sets the size (width) of the divider. The value is a dp value
-	 * 
+	 *
 	 * @param size
 	 *            The size (width) of the divider in dp (device independent
 	 *            pixel = dp = dip).
@@ -1240,7 +1246,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Sets the size (width) of the divider. The value is in pixel.
-	 * 
+	 *
 	 * @param pixel
 	 *            The size (widht) of the divider in pixels
 	 * @return
@@ -1254,10 +1260,10 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Draw the divider as solid color (using {@link ColorDrawable}).
-	 * 
+	 *
 	 * You must enable the divider by calling
 	 * {@link #setDividerEnabled(boolean)}
-	 * 
+	 *
 	 * @param color
 	 * @return
 	 */
@@ -1331,7 +1337,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Returns the ViewGroup used as a parent for the swipe back view.
-	 * 
+	 *
 	 * @return The swipe back view's parent.
 	 */
 	public ViewGroup getSwipeBackContainer() {
@@ -1353,7 +1359,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Set the swipe back view from a layout resource.
-	 * 
+	 *
 	 * @param layoutResId
 	 *            Resource ID to be inflated.
 	 */
@@ -1368,9 +1374,21 @@ public abstract class SwipeBack extends ViewGroup {
 		return this;
 	}
 
+    public SwipeBack setUpDefalutSwipeBackView() {
+        int layoutResId = R.layout.swipeback_translate;
+        mSwipeBackContainer.removeAllViews();
+        mSwipeBackView = LayoutInflater.from(getContext()).inflate(layoutResId,
+                mSwipeBackContainer, false);
+        mSwipeBackContainer.addView(mSwipeBackView);
+
+        notifySwipeBackViewCreated(mSwipeBackView);
+
+        return this;
+    }
+
 	/**
 	 * Set the swipe back view to an explicit view.
-	 * 
+	 *
 	 * @param view
 	 *            The swipe back view.
 	 */
@@ -1381,7 +1399,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Set the swipe back view to an explicit view.
-	 * 
+	 *
 	 * @param view
 	 *            The swipe back view.
 	 * @param params
@@ -1398,9 +1416,9 @@ public abstract class SwipeBack extends ViewGroup {
 	}
 
 	/**
-	 * Notify the {@link SwipeBackTransformer} that the swipe back has been
+	 * Notify the {@link com.hannesdorfmann.swipeback.transformer.SwipeBackTransformer} that the swipe back has been
 	 * created (inflated and ready to use)
-	 * 
+	 *
 	 * @param view
 	 */
 	private void notifySwipeBackViewCreated(View view) {
@@ -1413,7 +1431,7 @@ public abstract class SwipeBack extends ViewGroup {
 
 	/**
 	 * Returns the swipe back view.
-	 * 
+	 *
 	 * @return The swipe back view.
 	 */
 	public View getSwipeBackView() {
@@ -1551,8 +1569,8 @@ public abstract class SwipeBack extends ViewGroup {
 	}
 
 	/**
-	 * Set the {@link SwipeBackTransformer}
-	 * 
+	 * Set the {@link com.hannesdorfmann.swipeback.transformer.SwipeBackTransformer}
+	 *
 	 * @param transformer
 	 */
 	public SwipeBack setSwipeBackTransformer(SwipeBackTransformer transformer) {
@@ -1564,8 +1582,8 @@ public abstract class SwipeBack extends ViewGroup {
 	}
 
 	/**
-	 * Get the {@link SwipeBackTransformer}
-	 * 
+	 * Get the {@link com.hannesdorfmann.swipeback.transformer.SwipeBackTransformer}
+	 *
 	 * @return
 	 */
 	public SwipeBackTransformer getSwipeBackTransformer() {
@@ -1575,7 +1593,7 @@ public abstract class SwipeBack extends ViewGroup {
 	/**
 	 * An additional {@link OnStateChangeListener} which will be plugged in to
 	 * the internal delegate to allow to observe the internal state from outside
-	 * 
+	 *
 	 * @param listener
 	 *            The {@link OnStateChangeListener} listener
 	 * @return
@@ -1694,4 +1712,16 @@ public abstract class SwipeBack extends ViewGroup {
 			}
 		};
 	}
+
+
+    protected OnOpenListener onOpenListener;
+
+    public void setOnOpenListener(OnOpenListener onOpenListener) {
+        this.onOpenListener = onOpenListener;
+    }
+
+    public interface OnOpenListener {
+        boolean onOpen();
+    }
+
 }
